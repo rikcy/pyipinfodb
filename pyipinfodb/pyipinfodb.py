@@ -35,7 +35,9 @@ class IPInfo() :
                 # if domain is not found, just use input
                 passdict['ip'] = ip
         url = baseurl + "?" + urlencode(passdict)
-        urlobj = urllib2.urlopen(url)
+        req = urllib2.Request(url, headers={'User-Agent' : "IPInfoDb Browser"}) #To fix Forbidden error from the API
+
+        urlobj = urllib2.urlopen(req)
         data = urlobj.read()
         urlobj.close()
         datadict = json.loads(data.decode('utf-8'))
